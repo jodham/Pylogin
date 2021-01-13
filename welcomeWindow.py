@@ -12,8 +12,6 @@ class welcomeWin:
         self.button1.place(x=90,y=100)
         self.button2 = Button(self.window, text="REGISTER", font="times 13 bold", command=register)
         self.button2.place(x=90,y=150)
-        self.button1 = Button(self.window, text="Forgot password", font="times 10")
-        self.button1.place(x=90,y=200)
     def run(self):
         self.window.mainloop()
 def login():

@@ -16,6 +16,10 @@ class Login:
         self.e1.place(x=80, y=100)
         self.e2 = Entry(self.loginWindow)
         self.e2.place(x=80, y=140)
+        self.button1 = Button(self.loginWindow,text="Login", font="times 13 bold")
+        self.button1.place(x=90, y=170)
+        self.button2 = Button(self.loginWindow, text="Forgot password", font="times 10")
+        self.button2.place(x=90,y=220)
     def run(self):
         self.loginWindow.mainloop()
 
@@ -34,5 +38,7 @@ class Register:
         self.label3.place(x=80,y=130)
         self.e2 = Entry(self.registerWindow, show='*')
         self.e2.place(x=80, y=160)
+        self.button1 = Button(self.registerWindow, text="Register",font="times 13 bold")
+        self.button1.place(x=90, y=190)
     def run(self):
         self.registerWindow.mainloop()
