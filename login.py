@@ -60,5 +60,11 @@ class Register:
 
         if self.username =="":
             tkinter.messagebox.showinfo("warning","please fill info")
+        else:
+            sql = "INSERT INTO logindetails(username,password) VALUES (%s,%s)"
+            val = (self.username,self.password)
+            mycur.execute(sql,val)
+            mydb.commit()
+            tkinter.messagebox.showinfo("Success",self.username+" "+"user added")
     def run(self):
         self.registerWindow.mainloop()
