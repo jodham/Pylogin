@@ -24,14 +24,30 @@ class Login:
         self.label2.place(x=80,y=70)
         self.label3 = Label(self.loginWindow, text="Password",font="times 13 bold")
         self.label3.place(x=80,y=120)
-        self.e1 = Entry(self.loginWindow)
-        self.e1.place(x=80, y=100)
-        self.e2 = Entry(self.loginWindow)
-        self.e2.place(x=80, y=140)
-        self.button1 = Button(self.loginWindow,text="Login", font="times 13 bold")
+        self.username_ent = Entry(self.loginWindow)
+        self.username_ent.place(x=80, y=100)
+        self.pass_ent = Entry(self.loginWindow,show="*")
+        self.pass_ent.place(x=80, y=140)
+        self.button1 = Button(self.loginWindow,text="Login", font="times 13 bold",command=self.login)
         self.button1.place(x=90, y=170)
         self.button2 = Button(self.loginWindow, text="Forgot password", font="times 10")
         self.button2.place(x=90,y=220)
+    def login(self):
+        self.username = self.username_ent.get()
+        self.password = self.pass_ent.get()
+        if self.username or self.password =="":
+            tkinter.messagebox.showinfo("warning","fill all fields")
+        else:
+            sql= "SELECT * FROM TABLE logindetails WHERE username=%s and password=%s"
+            mycur.execute(sql)
+            if self.username !="%s":
+                       tkinter.messagebox.showinfo("warning","user does not exist")
+            elif self.password !="%s":
+                tkinter.messagebox.showinfo("warnig","wrong password")
+            elif self.password =="%s" and self.username =="%S":
+                tkinter.messagebox.showinfo("success","Login success")
+            else:
+                tkinter.messagebox.showinfo("warning","wrong credentials")
 
     def run(self):
         self.loginWindow.mainloop()
@@ -58,8 +74,8 @@ class Register:
         self.username = self.username_ent.get()
         self.password = self.pass_ent.get()
 
-        if self.username =="":
-            tkinter.messagebox.showinfo("warning","please fill info")
+        if self.username or self.password =="":
+            tkinter.messagebox.showinfo("warning","fill all fields")
         else:
             sql = "INSERT INTO logindetails(username,password) VALUES (%s,%s)"
             val = (self.username,self.password)
