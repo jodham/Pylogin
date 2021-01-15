@@ -35,19 +35,19 @@ class Login:
     def login(self):
         self.username = self.username_ent.get()
         self.password = self.pass_ent.get()
-        if self.username or self.password =="":
+        if self.username =="" or self.password =="":
             tkinter.messagebox.showinfo("warning","fill all fields")
         else:
-            sql= "SELECT * FROM TABLE logindetails WHERE username=%s and password=%s"
-            mycur.execute(sql)
-            if self.username !="%s":
-                       tkinter.messagebox.showinfo("warning","user does not exist")
-            elif self.password !="%s":
-                tkinter.messagebox.showinfo("warnig","wrong password")
-            elif self.password =="%s" and self.username =="%S":
-                tkinter.messagebox.showinfo("success","Login success")
+            sql_query = "SELECT *FROM logindetails WHERE username ='"+self.username+"' AND password = '"+self.password+"'"
+            mycur.execute(sql_query)
+            rowcount = mycur.rowcount
+            print(rowcount)
+            if mycur.rowcount == 1:
+                tkinter.messagebox.showinfo("success","login success")
             else:
-                tkinter.messagebox.showinfo("warning","wrong credentials")
+                tkinter.messagebox.showinfo("warning","failed")
+            #myresult =mycur.fetchall()
+
 
     def run(self):
         self.loginWindow.mainloop()
@@ -81,6 +81,7 @@ class Register:
             val = (self.username,self.password)
             mycur.execute(sql,val)
             mydb.commit()
-            tkinter.messagebox.showinfo("Success",self.username+" "+"user added")
+            tkinter.messagebox.showinfo("Success",self.username+" "+"added")
+
     def run(self):
         self.registerWindow.mainloop()
